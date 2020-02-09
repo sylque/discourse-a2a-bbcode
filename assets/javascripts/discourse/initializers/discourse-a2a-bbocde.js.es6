@@ -33,22 +33,18 @@ export default {
             }
           }
 
+          // Remove the link text we added to make the link visible in preview
+          $elem.find('a[class^="a2a_button_"], a.a2a_dd').html('')
+
           // Execute AddToAny init and rendering
           runAddToAny($elem.get(0))
 
-          // Loop through each button
-          const links = $elem.find('a[class^="a2a_button_"]')
-          links.each((i, l) => {
-            // Remove the link text we added to make the link visible in preview
-            l.innerHTML = ''
-
-            // At this stage, Discourse has disabled target="_blank" on the 
-            // button links (not sure why), so we need to restore it
-            // https://meta.discourse.org/t/open-link-in-new-window/74231/2?u=jack2
-            l.addEventListener('click', e => {
-              window.open(l.href)
-              e.preventDefault()
-            })
+          // At this stage, Discourse has disabled target="_blank" on the 
+          // button links (not sure why), so we need to restore it
+          // https://meta.discourse.org/t/open-link-in-new-window/74231/2?u=jack2
+          $elem.find('a[class^="a2a_button_"]').click(e => {
+            window.open(e.target.closest('a').href)
+            e.preventDefault()        
           })
         },
         {
