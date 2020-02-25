@@ -2,6 +2,7 @@
 # about: Discourse plugin to allow inserting AddToAny social buttons in topics
 # version: 1.0.1
 # authors: Sylvain Quendez
+# url: https://github.com/sylque/discourse-a2a-bbcode
 
 # Load styles
 register_asset "stylesheets/discourse-a2a-bbocde.scss"
