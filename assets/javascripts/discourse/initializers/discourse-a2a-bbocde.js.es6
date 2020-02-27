@@ -25,7 +25,9 @@ export default {
           if (catIds[0]) {
             // If this way of getting the category doesn't work in the future,
             // we could use helper.widget.attrs.topicId
-            const catHref = $('.topic-category > a.badge-wrapper').attr('href')
+            const catHref = $('.topic-category > a.badge-wrapper')
+              .last()
+              .attr('href')
             const catId = catHref ? catHref.split('/').pop() : '1'
             if (!catIds.includes(catId)) {
               $elem.find('a[class^="a2a_button_"]').hide()
@@ -39,12 +41,12 @@ export default {
           // Execute AddToAny init and rendering
           runAddToAny($elem.get(0))
 
-          // At this stage, Discourse has disabled target="_blank" on the 
+          // At this stage, Discourse has disabled target="_blank" on the
           // button links (not sure why), so we need to restore it
           // https://meta.discourse.org/t/open-link-in-new-window/74231/2?u=jack2
           $elem.find('a[class^="a2a_button_"]').click(e => {
             window.open(e.target.closest('a').href)
-            e.preventDefault()        
+            e.preventDefault()
           })
         },
         {
