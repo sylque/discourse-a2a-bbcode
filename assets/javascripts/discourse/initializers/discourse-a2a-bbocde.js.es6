@@ -3,13 +3,15 @@ import { withPluginApi } from 'discourse/lib/plugin-api'
 export default {
   name: 'discourse-a2a-bbcode',
   initialize(container, app) {
+    const siteSettings = container.lookup('site-settings:main')
+
     // If plugin is disabled, quit
-    if (!app.SiteSettings['discourse_a2a_bbcode_enabled']) {
+    if (!siteSettings['discourse_a2a_bbcode_enabled']) {
       return
     }
 
     // Get the categories
-    const catIds = app.SiteSettings.discourse_a2a_bbcode_categories.split('|')
+    const catIds = siteSettings.discourse_a2a_bbcode_categories.split('|')
 
     withPluginApi('0.8.30', api => {
       api.decorateCooked(
